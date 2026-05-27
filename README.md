@@ -1,73 +1,29 @@
-# React + TypeScript + Vite
+# 🏎️ Mercury Racing
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> A sua pole position para dados, estatísticas e cronogramas da Fórmula 1 em tempo real.
 
-Currently, two official plugins are available:
+O **Mercury Racing** é um Dashboard interativo (SPA) construído para fãs de automobilismo e sim racing. O sistema consome dados em tempo real da API pública **OpenF1**, entregando tabelas interativas de classificação, calendário detalhado e análises de telemetria sem recarregamentos desnecessários.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🛠️ Stack Técnica
 
-## React Compiler
+- **Front-End:** React 18+ com Vite
+- **Linguagem:** TypeScript
+- **Gerenciamento de Estado:** Zustand
+- **Estilização:** Sass (SCSS)
+- **Rotas:** React Router v6
+- **Autenticação:** Firebase Auth
+- **Requisições:** Axios
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Como rodar o projeto localmente
 
-## Expanding the ESLint configuration
+1. Clone este repositório:
+   `git clone https://github.com/franssoares/mercury-racing.git`
+2. Instale as dependências:
+   `npm install`
+3. Configure o ficheiro `.env.local` com as suas credenciais do Firebase.
+4. Rode o servidor de desenvolvimento:
+   `npm run dev`
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Desenvolvido por [Franklin Soares](https://github.com/franssoares) na UFRN.
