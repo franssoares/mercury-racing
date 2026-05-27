@@ -1,10 +1,10 @@
-# 🏎️ Mercury Racing
+# Mercury Racing
 
 > A sua pole position para dados, estatísticas e cronogramas da Fórmula 1 em tempo real.
 
 O **Mercury Racing** é um Dashboard interativo (SPA) construído para fãs de automobilismo e sim racing. O sistema consome dados em tempo real da API pública **OpenF1**, entregando tabelas interativas de classificação, calendário detalhado e análises de telemetria sem recarregamentos desnecessários.
 
-## 🛠️ Stack Técnica
+## Stack Técnica
 
 - **Front-End:** React 18+ com Vite
 - **Linguagem:** TypeScript
@@ -14,7 +14,7 @@ O **Mercury Racing** é um Dashboard interativo (SPA) construído para fãs de a
 - **Autenticação:** Firebase Auth
 - **Requisições:** Axios
 
-## 🚀 Como rodar o projeto localmente
+## Como rodar o projeto localmente
 
 1. Clone este repositório:
    `git clone https://github.com/franssoares/mercury-racing.git`
