@@ -4,8 +4,9 @@ import axios from "axios";
  * Instância configurada do Axios para comunicação com a API da OpenF1.
  * Define a URL base para todas as requisições do sistema.
  */
-export const api = axios.create({
+export const openF1Api = axios.create({
     baseURL: "https://api.openf1.org/v1",
+    timeout: 10000,
 });
 
 /**
@@ -13,7 +14,7 @@ export const api = axios.create({
  * Captura falhas nas requisições, loga no console e propaga o erro.
  * Atende ao requisito de tratamento global de erros (tópico 8).
  */
-api.interceptors.response.use(
+openF1Api.interceptors.response.use(
     (response) => response,
     (error) => {
         console.error("Erro na requisição à OpenF1:", error);
