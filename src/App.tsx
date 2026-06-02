@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Layout } from "./components/Layout";
+import { Layout } from "./components/Layout/Layout";
 import { Home } from "./pages/Home";
 import { Standings } from "./pages/Standings";
-import { Calendar } from "./pages/Calendar";
-import { Login } from "./pages/Login";
+import { Calendar } from "./pages/Calendar/Calendar";
+import { Login } from "./pages/Login/Login";
 import { NotFound } from "./pages/NotFound";
 import { Realtime } from "./pages/Realtime";
 import { DriverProfile } from "./pages/DriverProfile";
