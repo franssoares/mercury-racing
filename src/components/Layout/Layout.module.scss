@@ -1,0 +1,73 @@
+@use "../../styles/variables" as *;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.layout-container {
+    display: grid;
+    grid-template-areas:
+        "header header"
+        "sidebar main"
+        "footer footer";
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+    background-color: $blackground;
+
+    @media (max-width: 600px) {
+        .layout-container {
+            grid-template-areas:
+                "header"
+                "main"
+                "sidebar"
+                "footer";
+            grid-template-columns: 1fr;
+        }
+    }
+}
+
+.header {
+    grid-area: header;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: solid;
+    border-color: $border-color;
+    background-color: $primary-color;
+    font-size: $font-size-global;
+
+    .content {
+        color: $text-color;
+    }
+}
+
+.sidebar {
+    grid-area: sidebar;
+    display: flex;
+    flex-direction: column;
+    border: solid;
+    font-size: $font-size-global;
+    justify-items: center;
+    padding: $spacing-small;
+}
+
+// children
+.mainContent {
+    grid-area: main;
+    padding: $spacing-medium;
+}
+
+.footer {
+    grid-area: footer;
+    display: grid;
+    grid-template-areas: "rights content version";
+    grid-column: auto 1fr auto;
+    font-size: $font-size-global;
+    justify-items: center;
+    border-top: solid 0.2rem $border-color;
+    background-color: $primary-color;
+    padding: $spacing-small;
+}
