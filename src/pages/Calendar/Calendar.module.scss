@@ -1,0 +1,224 @@
+.calendarContainer {
+    color: white;
+    padding: 1rem;
+    max-width: 900px; // A linha do tempo fica melhor se não for super larga no ecrã inteiro
+    margin: 0 auto;
+}
+
+// Cabeçalho com Titulo e Filtro de Ano
+.headerControls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    .title {
+        color: #007bff;
+        margin: 0;
+    }
+
+    .yearSelector {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background-color: rgba(255, 255, 255, 0.1);
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+
+        label {
+            font-weight: bold;
+            color: #ccc;
+        }
+
+        select {
+            background-color: #00031d;
+            color: white;
+            border: 1px solid #007bff;
+            padding: 0.4rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            outline: none;
+            cursor: pointer;
+
+            &:hover {
+                border-color: #4da3ff;
+            }
+        }
+    }
+}
+
+// Filtro de Pesquisa
+.searchContainer {
+    margin-bottom: 3rem;
+
+    .searchInput {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 1rem;
+        background-color: #f8f9fa;
+        color: black;
+        outline: none;
+
+        &:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+        }
+    }
+}
+
+/* =========================================
+   ESTILIZAÇÃO DA LINHA DO TEMPO (TIMELINE)
+   ========================================= */
+
+.timeline {
+    position: relative;
+    padding-left: 2rem;
+    margin-left: 1rem;
+    border-left: 2px solid rgba(255, 255, 255, 0.2); // A Linha vertical central
+}
+
+.timelineItem {
+    position: relative;
+    margin-bottom: 2.5rem;
+
+    // Bolinha padrão na linha do tempo
+    .timelineDot {
+        position: absolute;
+        left: -2.45rem; // Posiciona exatamente em cima da borda esquerda
+        top: 1rem;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: #00031d; // Cor de fundo do site
+        border: 2px solid #ccc;
+        z-index: 1;
+        transition: all 0.3s;
+    }
+
+    .timelineContent {
+        background-color: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        padding: 1.5rem;
+        transition:
+            transform 0.2s,
+            background-color 0.2s;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+    }
+
+    .gpCardTitle {
+        color: #007bff;
+        margin: 0 0 0.5rem 0;
+        font-size: 1.4rem;
+    }
+
+    .gpCardLocation {
+        margin: 0 0 1rem 0;
+        font-size: 0.9rem;
+        color: #ccc;
+    }
+}
+
+/* =========================================
+   DESTAQUES E ANIMAÇÕES
+   ========================================= */
+
+// Destaque do Fim de Semana todo
+.highlightedItem {
+    .timelineDot {
+        border-color: #007bff;
+        background-color: #007bff;
+        box-shadow:
+            0 0 10px #007bff,
+            0 0 20px #007bff;
+        animation: pulse 1.5s infinite;
+    }
+
+    .timelineContent {
+        border-color: #007bff;
+        background-color: rgba(0, 123, 255, 0.08);
+    }
+}
+
+// Animação da bolinha pulsante
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+    }
+}
+
+.sessionsContainer {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1rem;
+
+    .sessionsTitle {
+        margin-bottom: 0.5rem;
+        color: white;
+        font-size: 1rem;
+    }
+
+    .sessionRow {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem;
+        border-radius: 6px;
+        margin-bottom: 0.3rem;
+        font-size: 0.9rem;
+
+        .sessionTime {
+            color: #007bff;
+            font-weight: bold;
+        }
+    }
+
+    // Destaque apenas da Sessão exata!
+    .nextSessionGlow {
+        background-color: rgba(0, 123, 255, 0.2);
+        border: 1px solid #007bff;
+
+        .sessionTime {
+            color: #66b2ff; // Azul mais claro para contrastar
+        }
+    }
+}
+
+.badgeProxima {
+    margin-left: 0.8rem;
+    background-color: #ff3333;
+    color: white;
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+// Mensagens de Estado
+.loadingMessage {
+    color: white;
+    text-align: center;
+}
+.errorMessage {
+    color: #ff4d4d;
+    text-align: center;
+}
+.emptyMessage {
+    color: #ccc;
+    text-align: center;
+    padding: 2rem;
+}
