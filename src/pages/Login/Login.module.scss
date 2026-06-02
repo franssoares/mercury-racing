@@ -1,0 +1,106 @@
+@use "../../styles/variables" as *;
+@use "sass:color";
+
+.container-login-register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8rem;
+    height: 100%;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        padding: 2rem;
+        height: auto;
+    }
+}
+
+%form-card {
+    background-color: $secondary-color;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 350px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+
+    h2 {
+        color: $primary-color;
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+}
+
+.login {
+    @extend %form-card;
+}
+
+.register {
+    @extend %form-card;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    input[type="email"],
+    input[type="password"],
+    input[type="text"] {
+        width: 100%;
+        padding: 0.8rem;
+        border: 1px solid $border-color;
+        border-radius: 4px;
+        font-size: 1rem;
+        box-sizing: border-box;
+        background-color: $secondary-color;
+        border-color: $secondary-color;
+        &:focus {
+            outline: none;
+            border-color: $primary-color;
+        }
+    }
+
+    .password-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+
+        input {
+            padding-right: 2.5rem;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 0.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+
+            &:hover {
+                color: $primary-color;
+            }
+        }
+    }
+
+    input[type="submit"] {
+        padding: 0.8rem;
+        background-color: $primary-color;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: color.adjust($primary-color, $lightness: -15%);
+        }
+    }
+}
