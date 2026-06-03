@@ -99,7 +99,6 @@ export const Calendar = () => {
 
     const proximoGP = useMemo<Meeting | undefined>(() => {
         const hoje = new Date();
-        // Garantimos que a lista base está ordenada cronologicamente antes de procurar o próximo
         const listaCronologica = [...meetings].sort(
             (a, b) => a.startDate.getTime() - b.startDate.getTime(),
         );
@@ -128,11 +127,9 @@ export const Calendar = () => {
         return proxima;
     }, [meetings]);
 
-    // LÓGICA NOVA DE ORDENAÇÃO (Próxima corrida no topo, passadas depois)
     const meetingsOrganizados = useMemo(() => {
         const hoje = new Date().getTime();
 
-        // 1. Aplicar o filtro de pesquisa primeiro
         const filtrados = meetings.filter(
             (meeting) =>
                 meeting.country_name
@@ -143,30 +140,24 @@ export const Calendar = () => {
                     .includes(filtroPesquisa.toLowerCase()),
         );
 
-        // 2. Se for um ano passado (ex: 2023), mostramos na ordem cronológica normal (Janeiro a Dezembro)
         if (anoSelecionado < new Date().getFullYear()) {
             return filtrados.sort(
                 (a, b) => a.startDate.getTime() - b.startDate.getTime(),
             );
         }
 
-        // 3. Se for o ano atual, separamos o que já passou do que ainda vem aí
         const futuras = filtrados.filter((m) => m.endDate.getTime() >= hoje);
         const passadas = filtrados.filter((m) => m.endDate.getTime() < hoje);
 
-        // Futuras: A mais próxima fica no topo (Ordem crescente)
         futuras.sort((a, b) => a.startDate.getTime() - b.startDate.getTime());
 
-        // Passadas: A corrida que terminou mais recentemente fica logo abaixo (Ordem decrescente)
         passadas.sort((a, b) => b.startDate.getTime() - a.startDate.getTime());
 
-        // Juntamos as duas listas
         return [...futuras, ...passadas];
     }, [meetings, filtroPesquisa, anoSelecionado]);
 
     return (
         <div className={styles.calendarContainer}>
-            {/* CABEÇALHO COM TÍTULO E SELETOR DE ANO */}
             <div className={styles.headerControls}>
                 <h1 className={styles.title}>Calendário F1</h1>
 
@@ -206,15 +197,12 @@ export const Calendar = () => {
 
             {error && <h2 className={styles.errorMessage}>{error}</h2>}
 
-            {/* LINHA DO TEMPO */}
             {!loading && !error && (
                 <div className={styles.timeline}>
-                    {/* Agora iteramos sobre meetingsOrganizados em vez de meetingsFiltrados */}
                     {meetingsOrganizados.map((meeting) => {
                         const isProximoGp =
                             proximoGP?.meeting_key === meeting.meeting_key;
 
-                        // Adicionamos uma opacidade menor para as corridas que já passaram para dar foco visual às futuras
                         const jaPassou =
                             meeting.endDate.getTime() < new Date().getTime();
 
@@ -222,9 +210,8 @@ export const Calendar = () => {
                             <div
                                 key={meeting.meeting_key}
                                 className={`${styles.timelineItem} ${isProximoGp ? styles.highlightedItem : ""}`}
-                                style={{ opacity: jaPassou ? 0.6 : 1 }} // Feedback visual extra para corridas passadas
+                                style={{ opacity: jaPassou ? 0.6 : 1 }}
                             >
-                                {/* Bolinha na linha do tempo */}
                                 <div className={styles.timelineDot}></div>
 
                                 <div className={styles.timelineContent}>
