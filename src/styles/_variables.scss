@@ -1,15 +1,17 @@
-// Cores
-$primary-color: #00031d;
-$secondary-color: #00031d81;
-$text-color: white;
-$border-color: #ccc;
-$text-bold: 700;
-$blackground: rgba(50, 50, 51, 0.925);
-$font-style: Roboto;
+// Paleta Mercúrio (Planeta) - Tons de cinza asfalto, chumbo e prata metálico
+$blackground: #0f1012; // Fundo escuro profundo (Espaço/Sombra)
+$primary-color: #1a1c20; // Cinza chumbo escuro (Cabeçalho/Sidebar)
+$secondary-color: #282b30; // Cinza rochoso (Cards/Botões/Hovers)
+$text-color: #e6e8eb; // Prata/Branco claro (Texto principal)
+$text-muted: #8b9096; // Cinza poeira (Texto secundário)
+$border-color: rgba(255, 255, 255, 0.06); // Bordas super sutis
+$accent-color: #7b8fa1; // Acento metálico
 
-// Espaçamentos
+// Tipografia e Espaçamentos
+$font-style: "Roboto", sans-serif;
+$text-bold: 700;
 $spacing-small: 1rem;
 $spacing-medium: 2rem;
 
-// Fonte
-$font-size-global: 1.5rem;
+// A fonte global em 1.5rem (24px) quebrava o layout, o ideal para web moderna é 1rem (16px)
+$font-size-global: 1rem;
