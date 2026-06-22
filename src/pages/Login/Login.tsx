@@ -1,4 +1,5 @@
-import { useState, type SubmitEvent } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom"; // 1. Importe o hook de navegação
 import styles from "./Login.module.scss";
 import { auth } from "../../services/firebase";
 import {
@@ -8,6 +9,8 @@ import {
 import { Eye, EyeSlash } from "@phosphor-icons/react";
 
 export const Login = () => {
+    const navigate = useNavigate(); // 2. Inicialize o hook
+
     const [emailLogin, setEmailLogin] = useState("");
     const [senhaLogin, setSenhaLogin] = useState("");
     const [mostrarSenhaLogin, setMostrarSenhaLogin] = useState(false);
@@ -16,8 +19,10 @@ export const Login = () => {
     const [senhaRegister, setSenhaRegister] = useState("");
     const [mostrarSenhaRegister, setMostrarSenhaRegister] = useState(false);
 
-    //SyntheticEvent ou SyntheticEvent<HTMLFormElement> eh generico para todos os eventos, funciona com submit, mas o submit tem seu tipo proprio, o SubmitEvent ou SubmitEvent<HTMLFormElement>
-    const handleLoginSubmit = async (event: SubmitEvent<HTMLFormElement>) => {
+    // Usando React.FormEvent que é a tipagem correta do React para formulários
+    const handleLoginSubmit = async (
+        event: React.FormEvent<HTMLFormElement>,
+    ) => {
         event.preventDefault();
         try {
             const credenciais = await signInWithEmailAndPassword(
@@ -26,13 +31,17 @@ export const Login = () => {
                 senhaLogin,
             );
             console.log("Bem-vindo:", credenciais.user.email);
+
+            // 3. REDIRECIONA PARA A HOME OU DASHBOARD
+            navigate("/"); // Troque para "/app/h2h" se quiser que ele vá direto para a área protegida
         } catch (erro) {
             console.error("Email ou palavra-passe incorretos", erro);
+            alert("E-mail ou senha incorretos.");
         }
     };
 
     const handleRegisterSubmit = async (
-        event: SubmitEvent<HTMLFormElement>,
+        event: React.FormEvent<HTMLFormElement>,
     ) => {
         event.preventDefault();
 
