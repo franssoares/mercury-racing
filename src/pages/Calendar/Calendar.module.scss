@@ -1,11 +1,14 @@
+@use "../../styles/variables" as *;
+
 .calendarContainer {
-    color: white;
-    padding: 1rem;
-    max-width: 900px; // A linha do tempo fica melhor se não for super larga no ecrã inteiro
+    padding: 2.5rem 2rem 4rem;
+    max-width: 900px;
     margin: 0 auto;
+    width: 100%;
+    color: $text-color;
 }
 
-// Cabeçalho com Titulo e Filtro de Ano
+// === CABEÇALHO ===
 .headerControls {
     display: flex;
     justify-content: space-between;
@@ -15,70 +18,84 @@
     gap: 1rem;
 
     .title {
-        color: #007bff;
+        font-size: 2rem;
+        font-weight: 800;
+        color: $text-color;
         margin: 0;
+        letter-spacing: -0.02em;
     }
 
     .yearSelector {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
-        background-color: rgba(255, 255, 255, 0.1);
+        gap: 0.75rem;
+        background-color: $primary-color;
         padding: 0.5rem 1rem;
         border-radius: 8px;
+        border: 1px solid $border-color;
 
         label {
-            font-weight: bold;
-            color: #ccc;
+            font-weight: 700;
+            color: $text-muted;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         select {
-            background-color: #00031d;
-            color: white;
-            border: 1px solid #007bff;
-            padding: 0.4rem;
+            background-color: $secondary-color;
+            color: $text-color;
+            border: 1px solid $border-color;
+            padding: 0.4rem 0.8rem;
             border-radius: 4px;
-            font-size: 1rem;
+            font-size: 0.9rem;
+            font-weight: 600;
             outline: none;
             cursor: pointer;
+            transition: border-color 0.2s;
 
             &:hover {
-                border-color: #4da3ff;
+                border-color: $accent-color;
             }
         }
     }
 }
 
-// Filtro de Pesquisa
+// === FILTRO DE PESQUISA ===
 .searchContainer {
     margin-bottom: 3rem;
 
     .searchInput {
         width: 100%;
-        padding: 0.8rem 1rem;
+        padding: 1rem 1.25rem;
         border-radius: 8px;
-        border: 1px solid #ccc;
-        font-size: 1rem;
-        background-color: #f8f9fa;
-        color: black;
+        border: 1px solid $border-color;
+        font-size: 0.95rem;
+        background-color: $primary-color;
+        color: $text-color;
         outline: none;
+        transition: all 0.2s ease;
+
+        &::placeholder {
+            color: $text-muted;
+        }
 
         &:focus {
-            border-color: #007bff;
-            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+            border-color: $accent-color;
+            background-color: $secondary-color;
         }
     }
 }
 
 /* =========================================
-   ESTILIZAÇÃO DA LINHA DO TEMPO (TIMELINE)
+   LINHA DO TEMPO (TIMELINE)
    ========================================= */
 
 .timeline {
     position: relative;
-    padding-left: 2rem;
-    margin-left: 1rem;
-    border-left: 2px solid rgba(255, 255, 255, 0.2); // A Linha vertical central
+    padding-left: 2.5rem;
+    margin-left: 0.5rem;
+    border-left: 2px solid $border-color;
 }
 
 .timelineItem {
@@ -88,137 +105,162 @@
     // Bolinha padrão na linha do tempo
     .timelineDot {
         position: absolute;
-        left: -2.45rem; // Posiciona exatamente em cima da borda esquerda
-        top: 1rem;
-        width: 15px;
-        height: 15px;
+        left: -3rem;
+        top: 1.5rem;
+        width: 14px;
+        height: 14px;
         border-radius: 50%;
-        background-color: #00031d; // Cor de fundo do site
-        border: 2px solid #ccc;
+        background-color: $blackground;
+        border: 2px solid $text-muted;
         z-index: 1;
         transition: all 0.3s;
     }
 
     .timelineContent {
-        background-color: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        background-color: $primary-color;
+        border: 1px solid $border-color;
         border-radius: 8px;
         padding: 1.5rem;
         transition:
             transform 0.2s,
             background-color 0.2s;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 
         &:hover {
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: $secondary-color;
         }
     }
 
     .gpCardTitle {
-        color: #007bff;
+        color: $text-color;
         margin: 0 0 0.5rem 0;
         font-size: 1.4rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
     }
 
     .gpCardLocation {
-        margin: 0 0 1rem 0;
-        font-size: 0.9rem;
-        color: #ccc;
+        margin: 0 0 1.25rem 0;
+        font-size: 0.85rem;
+        color: $text-muted;
+        font-weight: 500;
     }
 }
 
 /* =========================================
-   DESTAQUES E ANIMAÇÕES
+   DESTAQUES E ANIMAÇÕES DA PRÓXIMA CORRIDA
    ========================================= */
 
-// Destaque do Fim de Semana todo
+// Destaque do Fim de Semana atual/próximo
 .highlightedItem {
     .timelineDot {
-        border-color: #007bff;
-        background-color: #007bff;
+        border-color: $text-color;
+        background-color: $text-color;
         box-shadow:
-            0 0 10px #007bff,
-            0 0 20px #007bff;
-        animation: pulse 1.5s infinite;
+            0 0 10px rgba(255, 255, 255, 0.3),
+            0 0 20px rgba(255, 255, 255, 0.1);
+        animation: pulse 2s infinite;
     }
 
     .timelineContent {
-        border-color: #007bff;
-        background-color: rgba(0, 123, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.2);
+        background-color: rgba(255, 255, 255, 0.03);
     }
 }
 
-// Animação da bolinha pulsante
 @keyframes pulse {
     0% {
-        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
     }
     70% {
-        box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
+        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
     }
     100% {
-        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
     }
 }
 
+// Lista de Sessões
 .sessionsContainer {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 1rem;
+    border-top: 1px solid $border-color;
+    padding-top: 1.25rem;
 
     .sessionsTitle {
-        margin-bottom: 0.5rem;
-        color: white;
-        font-size: 1rem;
+        margin-bottom: 0.8rem;
+        color: $text-muted;
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
     }
 
     .sessionRow {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0.5rem;
+        padding: 0.6rem 0.8rem;
         border-radius: 6px;
         margin-bottom: 0.3rem;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
+        font-weight: 500;
+        background-color: rgba(
+            0,
+            0,
+            0,
+            0.2
+        ); // Fundo sutil para destacar a linha
+        border: 1px solid transparent;
 
         .sessionTime {
-            color: #007bff;
-            font-weight: bold;
+            color: $text-muted;
+            font-family: "Roboto Mono", monospace;
         }
     }
 
-    // Destaque apenas da Sessão exata!
+    // Destaque apenas da Sessão exata (Treino, Quali ou Corrida) que vai ocorrer a seguir
     .nextSessionGlow {
-        background-color: rgba(0, 123, 255, 0.2);
-        border: 1px solid #007bff;
+        background-color: rgba(255, 255, 255, 0.05);
+        border: 1px solid $border-color;
+
+        span {
+            color: $text-color;
+            font-weight: 700;
+        }
 
         .sessionTime {
-            color: #66b2ff; // Azul mais claro para contrastar
+            color: $text-color;
         }
     }
 }
 
 .badgeProxima {
     margin-left: 0.8rem;
-    background-color: #ff3333;
-    color: white;
-    font-size: 0.7rem;
+    background-color: $text-color;
+    color: $primary-color;
+    font-size: 0.65rem;
     padding: 0.2rem 0.5rem;
     border-radius: 12px;
     text-transform: uppercase;
-    font-weight: bold;
+    font-weight: 800;
+    letter-spacing: 0.05em;
 }
 
-// Mensagens de Estado
-.loadingMessage {
-    color: white;
+/* =========================================
+   MENSAGENS DE ESTADO
+   ========================================= */
+
+.loadingMessage,
+.emptyMessage {
     text-align: center;
+    padding: 3rem 1rem;
+    font-size: 0.9rem;
+    color: $text-muted;
 }
+
 .errorMessage {
     color: #ff4d4d;
     text-align: center;
-}
-.emptyMessage {
-    color: #ccc;
-    text-align: center;
-    padding: 2rem;
+    padding: 3rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
 }
