@@ -1,0 +1,283 @@
+@use "../../styles/variables" as *;
+
+.page {
+    padding: 2.5rem 2rem 4rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+// — Botão voltar
+.backBtn {
+    background: none;
+    border: none;
+    color: $text-muted;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+    margin-bottom: 1.5rem;
+    transition: color 0.15s;
+
+    &:hover {
+        color: $text-color;
+    }
+}
+
+// — Hero Section (Perfil do Piloto)
+.hero {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    background: $primary-color;
+    border: 1px solid $border-color;
+    border-left: 4px solid;
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.heroLeft {
+    flex-shrink: 0;
+}
+
+.headshot {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: $secondary-color;
+}
+
+.headshotPlaceholder {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 2px solid;
+    background: $secondary-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: $text-color;
+}
+
+.heroRight {
+    flex: 1;
+}
+
+.acronym {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: $text-muted;
+    margin-bottom: 0.3rem;
+}
+
+.fullName {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: $text-color;
+    margin: 0 0 0.75rem;
+    letter-spacing: -0.02em;
+}
+
+.teamBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border: 1px solid;
+    border-radius: 20px;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: $text-color;
+    margin-bottom: 0.75rem;
+}
+
+.teamDot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.carNumber {
+    font-size: 2.2rem;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    opacity: 0.6;
+}
+
+// — Stats grid (Cards Analíticos)
+.statsGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+
+    @media (max-width: 600px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.card {
+    background: $primary-color;
+    border: 1px solid $border-color;
+    border-radius: 8px;
+    padding: 1.5rem;
+}
+
+.cardFull {
+    grid-column: 1 / -1;
+}
+
+.cardLabel {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: $text-muted;
+    margin: 0 0 1rem;
+}
+
+.naText {
+    font-size: 0.82rem;
+    color: $text-muted;
+}
+
+// Estatísticas do Campeonato
+.champStats {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.statItem {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.statValue {
+    font-size: 2rem;
+    font-weight: 900;
+    color: $text-color;
+    letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
+}
+
+.statLabel {
+    font-size: 0.7rem;
+    color: $text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.statDivider {
+    width: 1px;
+    height: 40px;
+    background: $border-color;
+}
+
+// Compostos de Pneu
+.compounds {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.compound {
+    padding: 0.3rem 0.75rem;
+    border: 1px solid;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+}
+
+// Histórico de Stints
+.stintsList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.stintRow {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid $border-color;
+
+    &:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+}
+
+.stintCompound {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.stintInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    font-size: 0.85rem;
+    color: $text-color;
+}
+
+.stintDetail {
+    font-size: 0.75rem;
+    color: $text-muted;
+}
+
+// — Skeletons (Carregamento)
+.skeletonHero {
+    height: 160px;
+    background: $primary-color;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    animation: pulse 1.4s ease-in-out infinite;
+}
+
+.skeletonBody {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.skeletonCard {
+    height: 120px;
+    background: $primary-color;
+    border-radius: 8px;
+    animation: pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+// — Erros e Mensagens
+.errorState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 5rem 0;
+    color: $text-muted;
+    font-size: 0.9rem;
+}

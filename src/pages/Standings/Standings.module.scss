@@ -1,0 +1,251 @@
+@use "../../styles/variables" as *;
+
+.page {
+    padding: 2.5rem 2rem 4rem;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+// — Page header
+.pageHeader {
+    margin-bottom: 2rem;
+}
+
+.eyebrow {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: $accent-color; // Centralizado para o acento da paleta Mercúrio
+    margin-bottom: 0.4rem;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: $text-color;
+    margin: 0 0 0.3rem;
+    letter-spacing: -0.02em;
+}
+
+.subtitle {
+    font-size: 0.82rem;
+    color: $text-muted;
+    margin: 0;
+}
+
+// — Tabs
+.tabs {
+    display: flex;
+    gap: 0.25rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid $border-color;
+    padding-bottom: 0;
+}
+
+.tab {
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 0.6rem 1.4rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: $text-muted;
+    cursor: pointer;
+    transition:
+        color 0.18s,
+        border-color 0.18s;
+    margin-bottom: -1px;
+
+    &:hover {
+        color: $text-color;
+    }
+
+    &.active {
+        color: $text-color;
+        border-bottom-color: $accent-color;
+    }
+}
+
+// — Table wrapper
+.tableWrap {
+    background: $primary-color; // Fundo do card em chumbo
+    border: 1px solid $border-color;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+// — Loading / error states
+.state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    padding: 3.5rem 1rem;
+    color: $text-muted;
+    font-size: 0.85rem;
+}
+
+.spinner {
+    width: 28px;
+    height: 28px;
+    border: 2px solid $border-color;
+    border-top-color: $accent-color;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.errorIcon {
+    font-size: 1.4rem;
+    color: $accent-color;
+}
+
+// — Table
+.table {
+    width: 100%;
+    border-collapse: collapse;
+
+    thead tr {
+        border-bottom: 1px solid $border-color;
+    }
+
+    th {
+        padding: 0.65rem 1rem;
+        text-align: left;
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: $text-muted;
+        white-space: nowrap;
+    }
+}
+
+.thPos {
+    width: 56px;
+    text-align: center;
+}
+.thDriver {
+    min-width: 160px;
+}
+.thTeam {
+    min-width: 140px;
+}
+.thPts {
+    width: 60px;
+    text-align: right;
+    padding-right: 1.2rem;
+}
+
+// — Rows
+.row {
+    border-bottom: 1px solid $border-color;
+    transition: background 0.12s;
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    &:hover {
+        background: $secondary-color; // Efeito de hover rochoso
+    }
+
+    &.leader {
+        background: rgba(255, 255, 255, 0.025);
+    }
+
+    td {
+        padding: 0.75rem 1rem;
+        font-size: 0.85rem;
+        color: $text-color;
+        vertical-align: middle;
+    }
+}
+
+// Position number
+.pos {
+    text-align: center;
+}
+
+.posNum {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: 1.5px solid;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: $text-color;
+}
+
+// Driver cell
+.driverCell {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.headshot {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: $secondary-color; // Placeholder do avatar na cor secundária
+    flex-shrink: 0;
+}
+
+.driverText {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.acronym {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: $text-color;
+    letter-spacing: 0.04em;
+}
+
+.fullName {
+    font-size: 0.72rem;
+    color: $text-muted;
+}
+
+// Team cell
+.teamCell {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: $text-muted;
+    font-size: 0.8rem;
+}
+
+.teamDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+// Points
+.pts {
+    text-align: right;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    padding-right: 1.2rem !important;
+    font-size: 0.9rem;
+}

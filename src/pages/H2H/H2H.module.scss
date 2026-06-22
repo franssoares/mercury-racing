@@ -1,0 +1,167 @@
+@use "../../styles/variables" as *;
+
+.page {
+    padding: 2.5rem 2rem 4rem;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+    color: $text-color;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 2rem;
+
+    h1 {
+        color: $text-color;
+        margin-bottom: 0.5rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+    }
+
+    p {
+        color: $text-muted;
+        font-size: 0.9rem;
+    }
+}
+
+.selectors {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    background-color: $primary-color;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid $border-color;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+    .vs {
+        font-size: 1.5rem;
+        font-weight: 900;
+        color: $text-muted;
+        font-style: italic;
+    }
+
+    select {
+        background-color: $secondary-color;
+        color: $text-color;
+        border: 1px solid $border-color;
+        padding: 0.8rem 1rem;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        outline: none;
+        width: 100%;
+        max-width: 300px;
+        cursor: pointer;
+        transition: border-color 0.2s;
+
+        &:hover {
+            border-color: $accent-color;
+        }
+    }
+}
+
+.comparisonArea {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.driverHeaders {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .driverCard {
+        text-align: center;
+        flex: 1;
+
+        h2 {
+            font-size: 2rem;
+            margin: 0 0 0.5rem;
+            color: $text-color;
+            font-weight: 900;
+            letter-spacing: -0.03em;
+        }
+
+        span {
+            font-size: 0.85rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            border: 1px solid;
+        }
+    }
+}
+
+.statsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background-color: $primary-color;
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid $border-color;
+}
+
+.statRow {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .statTitle {
+        text-align: center;
+        font-size: 0.75rem;
+        color: $text-muted;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        font-weight: 800;
+    }
+
+    .barsWrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+
+        .valueLeft,
+        .valueRight {
+            width: 45px;
+            font-weight: 900;
+            font-size: 1.2rem;
+            color: $text-color;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .valueLeft {
+            text-align: right;
+        }
+        .valueRight {
+            text-align: left;
+        }
+
+        .barTrack {
+            flex: 1;
+            display: flex;
+            height: 12px;
+            background-color: $blackground;
+            border-radius: 6px;
+            overflow: hidden;
+
+            .barFillLeft,
+            .barFillRight {
+                height: 100%;
+                transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            .barFillLeft {
+                margin-left: auto;
+            }
+        }
+    }
+}
