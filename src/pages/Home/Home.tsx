@@ -2,6 +2,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import {
+    translateApiText,
+    translateCountryName,
+    translateTeamName,
+} from "../../utils/locale";
 import styles from "./Home.module.scss";
 
 interface Meeting {
@@ -184,8 +189,10 @@ export const Home = () => {
                 <div className={styles.heroContent}>
                     <span className={styles.heroEyebrow}>Temporada 2026</span>
                     <h1 className={styles.heroTitle}>
-                        Sua{" "}
-                        <span className={styles.heroAccent}>pole position</span>
+                        Seu{" "}
+                        <span className={styles.heroAccent}>
+                            painel completo
+                        </span>
                         <br />
                         para dados da F1.
                     </h1>
@@ -217,7 +224,7 @@ export const Home = () => {
             <section className={styles.widgets}>
                 {/* Countdown */}
                 <div className={styles.widget}>
-                    <p className={styles.widgetLabel}>Próxima Corrida</p>
+                    <p className={styles.widgetLabel}>Próximo Evento</p>
 
                     {loading && <div className={styles.skeletonBlock} />}
 
@@ -227,17 +234,23 @@ export const Home = () => {
                                 {nextRace.country_flag && (
                                     <img
                                         src={nextRace.country_flag}
-                                        alt={nextRace.country_name}
+                                        alt={translateCountryName(
+                                            nextRace.country_name,
+                                        )}
                                         className={styles.flag}
                                     />
                                 )}
                                 <div>
                                     <h2 className={styles.raceName}>
-                                        {nextRace.meeting_name}
+                                        {translateApiText(
+                                            nextRace.meeting_name,
+                                        )}
                                     </h2>
                                     <span className={styles.raceLocation}>
-                                        {nextRace.location} ·{" "}
-                                        {formatDate(nextRace.date_start)}
+                                        {translateCountryName(
+                                            nextRace.location,
+                                        )}{" "}
+                                        · {formatDate(nextRace.date_start)}
                                     </span>
                                 </div>
                             </div>
@@ -273,7 +286,7 @@ export const Home = () => {
                 {/* Top 3 */}
                 <div className={styles.widget}>
                     <p className={styles.widgetLabel}>
-                        Championship Quick View
+                        Visão rápida do campeonato
                     </p>
 
                     {loading && (
@@ -318,11 +331,11 @@ export const Home = () => {
                                             className={styles.top3Team}
                                             style={{ color }}
                                         >
-                                            {teamName}
+                                            {translateTeamName(teamName)}
                                         </span>
                                     </div>
                                     <span className={styles.top3Pts}>
-                                        {d.points_current} pts
+                                        {d.points_current} pontos
                                     </span>
                                 </button>
                             );
