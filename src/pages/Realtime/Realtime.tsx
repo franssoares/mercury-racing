@@ -1,5 +1,11 @@
 import { useEffect, useState, useRef } from "react";
 import { openF1Api } from "../../services/openF1Api";
+import {
+    translateApiText,
+    translateCountryName,
+    translateSessionName,
+    translateTeamName,
+} from "../../utils/locale";
 import styles from "./Realtime.module.scss";
 
 // --- Interfaces da API ---
@@ -424,13 +430,13 @@ export const Realtime = () => {
             setIsUsingFallback(true);
             setApiError(null);
             setSessionInfo({
-                name: "Catalunya Grand Prix - Race (Offline)",
+                name: "Catalunha Grande Prêmio - Corrida (offline)",
                 isLive: false,
             });
 
             // Simula a próxima corrida no modo fallback para você testar o layout do banner
             setNextRace({
-                name: "Austria Grand Prix - Practice 1",
+                name: "Áustria Grande Prêmio - Treino Livre 1",
                 date: new Date(Date.now() + 86400000 * 5).toISOString(),
             });
 
@@ -455,8 +461,8 @@ export const Realtime = () => {
                     : false;
 
                 const title = latestSession
-                    ? `${latestSession.country_name} Grand Prix - ${latestSession.session_name}`
-                    : "Formula 1";
+                    ? `${translateCountryName(latestSession.country_name)} Grande Prêmio - ${translateSessionName(latestSession.session_name)}`
+                    : "Fórmula 1";
                 setSessionInfo({ name: title, isLive: isSessionActive });
 
                 // 2. Lógica da Próxima Corrida (Se não estiver ao vivo)
@@ -469,7 +475,7 @@ export const Realtime = () => {
                         if (futureSessions.data.length > 0) {
                             const next = futureSessions.data[0];
                             setNextRace({
-                                name: `${next.country_name} Grand Prix - ${next.session_name}`,
+                                name: `${translateCountryName(next.country_name)} Grande Prêmio - ${translateSessionName(next.session_name)}`,
                                 date: next.date_start,
                             });
                         }
@@ -553,7 +559,7 @@ export const Realtime = () => {
 
                 const formatTime = (raw: any, isLeader: boolean) => {
                     if (isLeader) return "---";
-                    if (raw === undefined || raw === null) return "PIT";
+                    if (raw === undefined || raw === null) return "BOX";
                     const num = Number(raw);
                     if (
                         (!isNaN(num) && typeof raw !== "string") ||
@@ -638,14 +644,14 @@ export const Realtime = () => {
             {!sessionInfo.isLive && nextRace && (
                 <div className={styles.nextRaceBanner}>
                     <div className={styles.bannerInfo}>
-                        <span>Próxima Sessão Oficial</span>
+                        <span>Próxima sessão oficial</span>
                         <strong>{nextRace.name}</strong>
                     </div>
                     <div
                         className={styles.bannerInfo}
                         style={{ alignItems: "flex-end" }}
                     >
-                        <span>Horário Local</span>
+                        <span>Horário local</span>
                         <strong>{formatDate(nextRace.date)}</strong>
                     </div>
                 </div>
@@ -654,13 +660,13 @@ export const Realtime = () => {
             {/* CABEÇALHO DA SESSÃO */}
             <div className={styles.sessionHeader}>
                 <div className={styles.titleArea}>
-                    <h1>🏁 {sessionInfo.name}</h1>
+                    <h1>🏁 {translateApiText(sessionInfo.name)}</h1>
                     <span
                         className={`${styles.status} ${sessionInfo.isLive ? styles.live : styles.finalised}`}
                     >
-                        {sessionInfo.isLive ? "● LIVE" : "Finalised"}
-                        {isPolling && " (Sincronizando...)"}
-                        {isUsingFallback && " (Modo Offline)"}
+                        {sessionInfo.isLive ? "● AO VIVO" : "Finalizada"}
+                        {isPolling && " (sincronizando...)"}
+                        {isUsingFallback && " (modo offline)"}
                     </span>
                 </div>
             </div>
@@ -674,14 +680,14 @@ export const Realtime = () => {
                     {/* CABEÇALHO DA TABELA */}
                     <div className={styles.gridHeader}>
                         <span>Pos</span>
-                        <span>Driver</span>
-                        <span>Stint History</span>
-                        <span className={styles.centerAlign}>Pits</span>
+                        <span>Piloto</span>
+                        <span>Histórico de stint</span>
+                        <span className={styles.centerAlign}>Boxes</span>
                         <span className={styles.centerAlign}>S1</span>
                         <span className={styles.centerAlign}>S2</span>
                         <span className={styles.centerAlign}>S3</span>
-                        <span className={styles.rightAlign}>Leader</span>
-                        <span className={styles.rightAlign}>Interval</span>
+                        <span className={styles.rightAlign}>Líder</span>
+                        <span className={styles.rightAlign}>Intervalo</span>
                     </div>
 
                     {/* CORPO DA TABELA */}
@@ -710,7 +716,7 @@ export const Realtime = () => {
                                             className={styles.team}
                                             style={{ color: driver.color }}
                                         >
-                                            {driver.team}
+                                            {translateTeamName(driver.team)}
                                         </span>
                                     </div>
 
