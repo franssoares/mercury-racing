@@ -61,7 +61,7 @@ export const Layout = ({ children }: LayoutProps) => {
                         </>
                     ) : (
                         <Link to="/login" className={styles.loginLink}>
-                            Login Seguro
+                            Login seguro
                         </Link>
                     )}
                 </div>
@@ -71,22 +71,22 @@ export const Layout = ({ children }: LayoutProps) => {
             <aside>
                 <nav className={styles.sidebar}>
                     <Link to="/">
-                        <House /> Dashboard
+                        <House /> Painel
                     </Link>
                     <Link to="/calendar">
-                        <Calendar /> Calendar
+                        <Calendar /> Calendário
                     </Link>
                     <Link to="/standings">
-                        <Trophy /> Standings
+                        <Trophy /> Classificação
                     </Link>
                     <Link to="/drivers">
-                        <ChartBar /> Drivers
+                        <ChartBar /> Pilotos
                     </Link>
                     <Link to="/app/h2h">
-                        <Trophy /> Head-to-Head
+                        <Trophy /> H2H
                     </Link>
                     <Link to="/app/realtime">
-                        <Timer /> Live Telemetry
+                        <Timer /> Telemetria ao vivo
                     </Link>
                 </nav>
             </aside>
@@ -97,7 +97,7 @@ export const Layout = ({ children }: LayoutProps) => {
             {/* RODAPÉ */}
             <footer className={styles.footer}>
                 <div>© 2026 Mercury Racing</div>
-                <div>Telemetry System</div>
+                <div>Sistema de telemetria</div>
                 <div>v1.2.0</div>
             </footer>
         </div>
