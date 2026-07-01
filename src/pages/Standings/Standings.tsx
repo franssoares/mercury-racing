@@ -1,6 +1,7 @@
 // src/pages/Standings/Standings.tsx
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { translateTeamName } from "../../utils/locale";
 import styles from "./Standings.module.scss";
 
 interface ChampionshipDriver {
@@ -230,7 +231,7 @@ export const Standings = () => {
                                                 className={styles.teamDot}
                                                 style={{ background: color }}
                                             />
-                                            {teamName || "—"}
+                                            {translateTeamName(teamName) || "—"}
                                         </td>
                                         <td className={styles.pts}>
                                             {d.points_current}
@@ -276,7 +277,9 @@ export const Standings = () => {
                                                     className={styles.acronym}
                                                     style={{ color }}
                                                 >
-                                                    {t.team_name}
+                                                    {translateTeamName(
+                                                        t.team_name,
+                                                    )}
                                                 </span>
                                             </div>
                                         </td>

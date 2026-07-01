@@ -1,6 +1,7 @@
 // src/pages/H2H/H2H.tsx
 import { useEffect, useState } from "react";
 import { openF1Api } from "../../services/openF1Api";
+import { translateTeamName } from "../../utils/locale";
 import styles from "./H2H.module.scss";
 
 // Tipagens para o que vem da API
@@ -41,10 +42,44 @@ const TEAM_COLORS: Record<string, string> = {
     "Kick Sauber": "#52E252",
 };
 
+const FALLBACK_H2H_DRIVERS: DriverStats[] = [
+    {
+        id: 1,
+        name: "Max Verstappen",
+        team: "Red Bull Racing",
+        color: "#3671C6",
+        points: 342,
+        wins: 8,
+        podiums: 10,
+        dnfs: 0,
+    },
+    {
+        id: 44,
+        name: "Lewis Hamilton",
+        team: "Mercedes",
+        color: "#27F4D2",
+        points: 275,
+        wins: 6,
+        podiums: 9,
+        dnfs: 1,
+    },
+    {
+        id: 16,
+        name: "Charles Leclerc",
+        team: "Ferrari",
+        color: "#E80020",
+        points: 239,
+        wins: 3,
+        podiums: 7,
+        dnfs: 1,
+    },
+];
+
 export const H2H = () => {
     const [driversData, setDriversData] = useState<DriverStats[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [isOffline, setIsOffline] = useState(false);
 
     // Seletores (iniciam vazios e são preenchidos após o carregamento)
     const [driver1Id, setDriver1Id] = useState<number | null>(null);
@@ -109,8 +144,14 @@ export const H2H = () => {
                     setDriver2Id(mergedData[1].id);
                 }
             } catch (err) {
-                console.error(err);
-                setError("Falha ao buscar dados dos pilotos para comparação.");
+                console.error("H2H fetch error:", err);
+                setIsOffline(true);
+                setDriversData(FALLBACK_H2H_DRIVERS);
+                setDriver1Id(FALLBACK_H2H_DRIVERS[0].id);
+                setDriver2Id(FALLBACK_H2H_DRIVERS[1].id);
+                setError(
+                    "Não foi possível carregar os dados em tempo real. Exibindo dados offline.",
+                );
             } finally {
                 setLoading(false);
             }
@@ -129,7 +170,7 @@ export const H2H = () => {
                 Carregando dados reais da OpenF1...
             </div>
         );
-    if (error)
+    if (error && !isOffline)
         return (
             <div
                 className={styles.page}
@@ -200,10 +241,10 @@ export const H2H = () => {
     return (
         <div className={styles.page}>
             <div className={styles.header}>
-                <h1>Comparativo Lado a Lado</h1>
+                <h1>Comparativo lado a lado</h1>
                 <p>
                     Analise e compare o desempenho dos pilotos na temporada
-                    atual (Dados reais ao vivo).
+                    atual (dados reais ao vivo).
                 </p>
             </div>
 
@@ -252,7 +293,7 @@ export const H2H = () => {
                                 backgroundColor: `${d1.color}22`,
                             }}
                         >
-                            {d1.team}
+                            {translateTeamName(d1.team)}
                         </span>
                     </div>
                     <div className={styles.driverCard}>
@@ -264,24 +305,24 @@ export const H2H = () => {
                                 backgroundColor: `${d2.color}22`,
                             }}
                         >
-                            {d2.team}
+                            {translateTeamName(d2.team)}
                         </span>
                     </div>
                 </div>
 
                 <div className={styles.statsContainer}>
                     <StatComparison
-                        label="Pontos Totais"
+                        label="Pontos totais"
                         val1={d1.points}
                         val2={d2.points}
                     />
                     <StatComparison
-                        label="Vitórias (Estimadas)"
+                        label="Vitórias (estimadas)"
                         val1={d1.wins}
                         val2={d2.wins}
                     />
                     <StatComparison
-                        label="Pódios (Estimados)"
+                        label="Pódios (estimados)"
                         val1={d1.podiums}
                         val2={d2.podiums}
                     />

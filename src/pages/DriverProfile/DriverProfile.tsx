@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { openF1Api } from "../../services/openF1Api";
+import { translateTeamName } from "../../utils/locale";
 import styles from "./DriverProfile.module.scss";
 
 interface DriverInfo {
@@ -277,7 +278,7 @@ export const DriverProfile = () => {
                                             color: "#888",
                                         }}
                                     >
-                                        {d.team_name}
+                                        {translateTeamName(d.team_name)}
                                     </div>
                                 </div>
                             </div>
@@ -331,7 +332,7 @@ export const DriverProfile = () => {
                             className={styles.teamDot}
                             style={{ background: teamColor }}
                         />
-                        {info.team_name}
+                        {translateTeamName(info.team_name)}
                     </div>
                     <div
                         className={styles.carNumber}
