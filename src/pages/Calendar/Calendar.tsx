@@ -1,5 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 import { openF1Api } from "../../services/openF1Api";
+import { translateCountryName, translateSessionName } from "../../utils/locale";
 import styles from "./Calendar.module.scss";
 
 interface Session {
@@ -216,7 +217,9 @@ export const Calendar = () => {
 
                                 <div className={styles.timelineContent}>
                                     <h3 className={styles.gpCardTitle}>
-                                        {meeting.country_name}
+                                        {translateCountryName(
+                                            meeting.country_name,
+                                        )}
                                         {jaPassou && (
                                             <span
                                                 style={{
@@ -268,16 +271,16 @@ export const Calendar = () => {
                                                         className={`${styles.sessionRow} ${isSessaoDestacada ? styles.nextSessionGlow : ""}`}
                                                     >
                                                         <span>
-                                                            {
-                                                                session.session_name
-                                                            }
+                                                            {translateSessionName(
+                                                                session.session_name,
+                                                            )}
                                                             {isSessaoDestacada && (
                                                                 <span
                                                                     className={
                                                                         styles.badgeProxima
                                                                     }
                                                                 >
-                                                                    A Seguir
+                                                                    A seguir
                                                                 </span>
                                                             )}
                                                         </span>
@@ -313,7 +316,8 @@ export const Calendar = () => {
 
                     {meetingsOrganizados.length === 0 && (
                         <p className={styles.emptyMessage}>
-                            Nenhum Grand Prix encontrado para "{filtroPesquisa}
+                            Nenhum Grande Prêmio encontrado para "
+                            {filtroPesquisa}
                             ".
                         </p>
                     )}
